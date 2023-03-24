@@ -9,21 +9,22 @@ import { SectionTitleComponent } from './home/section-title/section-title.compon
 import { FooterComponent } from './footer/footer.component';
 import { ProjectPageComponent } from './projects/project-page/project-page.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
-import { AboutPageComponent } from './about-page/about-page.component';
+import { AboutPageComponent } from './about/about-page/about-page.component';
 import { ProjectsModule } from './projects/projects.module';
 import { HomeModule } from './home/home.module';
+import { AboutModule } from './about/about.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    AboutPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ProjectsModule,
-    HomeModule
+    HomeModule,
+    AboutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
