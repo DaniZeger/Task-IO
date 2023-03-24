@@ -1,0 +1,24 @@
+<img [src]="getImagePath()" alt="" class="mx-auto d-block" style="width: 150px;">
+<app-section-title [text]="sectionTitle"></app-section-title>
+<h4 class="text-center mb-3">{{today | date:'mediumDate'}}</h4>
+<h2 class="text-center" [ngClass]="listStatusCss()">({{tasks.length}})</h2>
+
+<ul class="list-group">
+    <li *ngFor="let task of tasks" [ngClass]="completedCss(task)"
+        class="list-group-item d-flex justify-content-between align-items-center">
+        {{task.title}}
+        <div>
+            <app-button [icon]="'bi-check2-circle'" *ngIf="!task.complete"></app-button>
+            <app-button [icon]="'bi-pencil'"></app-button>
+
+        </div>
+    </li>
+</ul>
+
+<app-section-title [text]="sectionTitle2"></app-section-title>
+
+<div class="row">
+    <div *ngFor="let project of projects" class="col-3">
+        <app-project-card [projectItem]="project"></app-project-card>
+    </div>
+</div>
