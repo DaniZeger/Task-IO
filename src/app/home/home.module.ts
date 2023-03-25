@@ -15,7 +15,7 @@ import { ProjectsModule } from '../projects/projects.module';
   ],
   imports: [
     CommonModule,
-    ProjectsModule
+    ProjectsModule,
   ],
   exports: [
     ButtonComponent,

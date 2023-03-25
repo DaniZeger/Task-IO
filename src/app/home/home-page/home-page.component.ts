@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/core/api.service';
+import { LoggerService } from 'src/app/core/logger.service';
 import { Task, Project } from '../../app.component'
 
 @Component({
@@ -6,11 +8,23 @@ import { Task, Project } from '../../app.component'
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
   today = new Date()
 
   sectionTitle = `Today's Tasks`
   sectionTitle2 = `My Projects`
+
+  constructor(
+    private api: ApiService,
+    private logger: LoggerService
+  ) { }
+
+  ngOnInit(): void {
+    this.api.getUserPosts().subscribe({
+      next: (data) => this.logger.log(data.toString()),
+      error: (err) => console.log(err)
+    })
+  }
 
   projects: Array<Project> = [
     {
