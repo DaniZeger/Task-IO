@@ -19,7 +19,7 @@ export class SignupPageComponent {
 
   signUpForm = new FormGroup({
     name: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(2)]
+      validators: [Validators.required, Validators.maxLength(20)]
     }),
     email: new FormControl('', {
       validators: [Validators.required, Validators.email]
@@ -28,6 +28,10 @@ export class SignupPageComponent {
       validators: [Validators.required, Validators.minLength(6)]
     })
   })
+
+  getFieldControl(field: string): FormControl {
+    return this.signUpForm.get(field) as FormControl
+  }
 
   onSubmit() {
     if (this.signUpForm.invalid) {

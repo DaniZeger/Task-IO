@@ -16,6 +16,10 @@ export class LoginPageComponent {
     })
   })
 
+  getFieldControl(field: string): FormControl {
+    return this.logInForm.get(field) as FormControl
+  }
+
   onSubmit() {
     if (this.logInForm.invalid) {
       return;
