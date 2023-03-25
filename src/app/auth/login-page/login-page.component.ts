@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements AfterViewInit {
   logInForm = new FormGroup({
     email: new FormControl('', {
       validators: [Validators.required, Validators.email]
@@ -15,6 +15,12 @@ export class LoginPageComponent {
       validators: [Validators.required, Validators.minLength(6)]
     })
   })
+
+  @ViewChild('emailFieldRef') emailField!: ElementRef
+
+  ngAfterViewInit(): void {
+    this.emailField.nativeElement.focus()
+  }
 
   getFieldControl(field: string): FormControl {
     return this.logInForm.get(field) as FormControl

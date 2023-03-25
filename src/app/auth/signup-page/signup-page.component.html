@@ -1,6 +1,5 @@
 <h2 class="text-center"> Sign Up to Our App </h2>
 
-
 <!--? Example for uncomplicated forms using "FormsMudule" -->
 <!-- <div class="mb-3">
     <label for="name">Name:</label>
@@ -22,7 +21,7 @@
 
     <div class="mb-3">
         <label for="name">Name:</label>
-        <input formControlName="name" type="text" class="form-control" id="name" placeholder="Name">
+        <input #nameFieldRef formControlName="name" type="text" class="form-control" id="name" placeholder="Name">
     </div>
     <app-field-error [formField]="getFieldControl('name')"></app-field-error>
 

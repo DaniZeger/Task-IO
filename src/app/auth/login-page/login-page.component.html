@@ -4,7 +4,7 @@
 
     <div class="mb-3">
         <label for="email">Email:</label>
-        <input formControlName="email" type="text" class="form-control" id="email">
+        <input #emailFieldRef formControlName="email" type="text" class="form-control" id="email">
     </div>
     <app-field-error [formField]="getFieldControl('email')"></app-field-error>
 
