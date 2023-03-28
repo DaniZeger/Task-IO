@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/api.service';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -20,7 +21,8 @@ export class LoginPageComponent implements AfterViewInit {
 
   constructor(
     private api: ApiService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   @ViewChild('emailFieldRef') emailField!: ElementRef
@@ -43,7 +45,7 @@ export class LoginPageComponent implements AfterViewInit {
       next: (data) => {
         console.log(data);
         if (data.token) this.api.setToken(data.token)
-        this.router.navigate(['home'])
+        this.router.navigate([this.auth.redirectUrl])
       },
       error: (err) => console.log(err)
     })
