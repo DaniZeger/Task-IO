@@ -10,6 +10,21 @@ export class ApiService {
 
   serverUrl = 'http://localhost:3000/'
 
+  private token = ''
+  TOKEN_KEY = 'token'
+  setToken(val: string) {
+    localStorage.setItem(this.TOKEN_KEY, val)
+    // this.token = val
+  }
+
+  getToken(): string {
+    return localStorage.getItem(this.TOKEN_KEY) || ''
+  }
+
+  deleteToken() {
+    localStorage.removeItem(this.TOKEN_KEY)
+  }
+
   constructor(private http: HttpClient) { }
 
   // getUserPosts() {
@@ -25,14 +40,25 @@ export class ApiService {
     return this.http.post<T>(
       `${this.serverUrl}${endpoint}`,
       data,
-      { headers: { 'Content-Type': 'application/json' } }
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': this.getToken()
+        }
+      }
     )
   }
 
   //! ###### TASKS MATHODS ######
 
   getTasks(): Observable<Array<Task>> {
-    return this.http.get<Array<Task>>(`${this.serverUrl}tasks`)
+    return this.http.get<Array<Task>>(`${this.serverUrl}tasks`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': this.getToken()
+        }
+      })
   }
 
   addTask(task: Task): Observable<Task> {
@@ -46,16 +72,26 @@ export class ApiService {
 
   deleteTask(id: string): Observable<Task> {
     return this.http.delete<Task>(
-      `${this.serverUrl}/tasks/${id}`,
-      { headers: { 'Content-Type': 'application/json' } }
+      `${this.serverUrl}tasks/${id}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': this.getToken()
+        }
+      }
     )
   }
 
   updateTask(id: string, task: Task): Observable<Task> {
     return this.http.put<Task>(
-      `${this.serverUrl}/tasks/${id}`,
+      `${this.serverUrl}tasks/${id}`,
       task,
-      { headers: { 'Content-Type': 'application/json' } }
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': this.getToken()
+        }
+      }
     )
   }
 
@@ -63,6 +99,10 @@ export class ApiService {
 
   signUp(user: User): Observable<User> {
     return this.POST<User>('users/signup', user)
+  }
+
+  logIn(user: User): Observable<User> {
+    return this.POST<User>('users/login', user)
   }
 
 }

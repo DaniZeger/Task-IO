@@ -1,4 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ApiService } from './core/api.service';
+import { AuthService } from './core/auth.service';
 import { SessionService } from './core/session.service';
 
 export interface Task {
@@ -20,6 +23,8 @@ export interface User {
   name?: string | null
   email?: string | null
   password?: string | null
+  token?: string | null
+
 }
 
 @Component({
@@ -31,10 +36,24 @@ export class AppComponent implements AfterViewInit {
   title = 'Task IO';
   dev = 'DaniZeger'
 
-  constructor(private session: SessionService) { }
+  constructor(
+    private session: SessionService,
+    private api: ApiService,
+    private router: Router,
+    private auth: AuthService
+  ) { }
 
   ngAfterViewInit(): void {
     // this.session.redirectToHome()
+  }
+
+  loggedIn(): boolean {
+    return this.auth.isLoggedIn()
+  }
+
+  logOut() {
+    this.api.deleteToken()
+    this.router.navigate(['login'])
   }
 
 }

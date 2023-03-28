@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/core/api.service';
 
 @Component({
   selector: 'app-login-page',
@@ -15,6 +17,11 @@ export class LoginPageComponent implements AfterViewInit {
       validators: [Validators.required, Validators.minLength(6)]
     })
   })
+
+  constructor(
+    private api: ApiService,
+    private router: Router
+  ) { }
 
   @ViewChild('emailFieldRef') emailField!: ElementRef
 
@@ -32,6 +39,14 @@ export class LoginPageComponent implements AfterViewInit {
     }
 
     console.log(this.logInForm.value);
+    this.api.logIn(this.logInForm.value).subscribe({
+      next: (data) => {
+        console.log(data);
+        if (data.token) this.api.setToken(data.token)
+        this.router.navigate(['home'])
+      },
+      error: (err) => console.log(err)
+    })
 
   }
 }

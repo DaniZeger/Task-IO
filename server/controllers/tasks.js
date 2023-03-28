@@ -2,6 +2,7 @@ const joi = require('joi');
 const { Task } = require('../models/Task');
 
 module.exports = {
+    // @ts-ignore
     getAll: async function (req, res, next) {
         try {
             const result = await Task.find({});
@@ -13,6 +14,7 @@ module.exports = {
         }
     },
 
+    // @ts-ignore
     getOne: async function (req, res, next) {
         try {
             const schema = joi.object({
@@ -36,6 +38,7 @@ module.exports = {
         }
     },
 
+    // @ts-ignore
     addNew: async function (req, res, next) {
         try {
             const schema = joi.object({
@@ -56,11 +59,13 @@ module.exports = {
             res.json(newTask);
         }
         catch (err) {
+            // @ts-ignore
             console.log(err.message);
             res.status(400).json({ error: `error adding task` });
         }
     },
 
+    // @ts-ignore
     updateDetails: async function (req, res, next) {
         try {
             const schema = joi.object({
@@ -86,11 +91,13 @@ module.exports = {
             res.json(updated);
         }
         catch (err) {
+            // @ts-ignore
             console.log(err.message);
             res.status(400).json({ error: `error updating details` });
         }
     },
 
+    // @ts-ignore
     deleteOne: async function (req, res, next) {
         try {
             const schema = joi.object({
@@ -112,6 +119,7 @@ module.exports = {
             res.json(deleted);
         }
         catch (err) {
+            // @ts-ignore
             console.log(err.message);
             res.status(400).json({ error: `error delete task` });
         }

@@ -1,10 +1,13 @@
 const { User } = require('../models/User');
+// @ts-ignore
 const jwt = require('jsonwebtoken');
 const config = require('../config/dev');
 const joi = require('joi');
+// @ts-ignore
 const bcrypt = require('bcrypt');
 
 module.exports = {
+    // @ts-ignore
     login: async function (req, res, next) {
         try {
             const schema = joi.object({
@@ -41,6 +44,7 @@ module.exports = {
         }
     },
 
+    // @ts-ignore
     signup: async function (req, res, next) {
         try {
             const schema = joi.object({
@@ -78,6 +82,7 @@ module.exports = {
             })
         }
         catch (err) {
+            // @ts-ignore
             console.log(err.message);
             res.status(400).json({ error: 'error sign up new user' });
         }
