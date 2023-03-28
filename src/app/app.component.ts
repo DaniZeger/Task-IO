@@ -1,5 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { type } from 'ngx-bootstrap-icons';
 import { ApiService } from './core/api.service';
 import { AuthService } from './core/auth.service';
 import { SessionService } from './core/session.service';
@@ -11,11 +12,14 @@ export interface Task {
   description?: string | null
 }
 
+export type ProjectStatus = 'PLANNED' | 'IN PROGRESS' | 'DONE'
+
 export interface Project {
-  title: string,
-  description: string,
-  image: string,
-  status: 'PLANNED' | 'IN PROGRESS' | 'DONE'
+  _id?: string | null,
+  title?: string | null,
+  description?: string | null,
+  image?: string | null,
+  status?: ProjectStatus | null
 }
 
 export interface User {

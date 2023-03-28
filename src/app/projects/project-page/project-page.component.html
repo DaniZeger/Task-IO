@@ -1,17 +1,17 @@
 <h2 class="text-center">Projects</h2>
 
 <div class="px-5">
-    <button class="btn btn-primary">Add project</button>
+    <a routerLink="/add-project" class="btn btn-primary">Add project</a>
 </div>
 
 <ul class="list-group px-5 mt-2">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        Project title: Description (status)
+    <li *ngFor="let project of projects" class="list-group-item d-flex justify-content-between align-items-center">
+        {{project.title}}: {{project.description}} || Status: {{project.status}}
         <div>
-            <button class="btn btn-light">
+            <a routerLink="/edit-project/{{project._id}}" class="btn btn-light">
                 <i class="bi bi-pencil text-primary"></i>
-            </button>
-            <button class="btn btn-light">
+            </a>
+            <button (click)="onDelete(project)" class="btn btn-light">
                 <i class="bi bi-trash text-danger"></i>
             </button>
         </div>

@@ -1,0 +1,21 @@
+<form [formGroup]="addProjectForm" (ngSubmit)="onSubmit()" class="row mb-4 px-5">
+    <div class="mb-3">
+        <label for="title">Title:</label>
+        <input formControlName="title" type="text" class="form-control" placeholder="Title">
+    </div>
+    <div class="mb-3">
+        <label for="description">Description:</label>
+        <input formControlName="description" type="text" class="form-control" placeholder="Description">
+    </div>
+    <div class="mb-3">
+        <label for="status">Status:</label>
+        <select name="status" id="status">
+            <option value="PLANNED">PLANNED</option>
+            <option value="IM PROGRESS">IM PROGRESS</option>
+            <option value="DONE">DONE</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <button [disabled]="addProjectForm.invalid" type="submit" class="btn btn-primary">Add Project</button>
+    </div>
+</form>

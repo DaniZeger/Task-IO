@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Task, User } from '../app.component';
+import * as tasks from 'server/controllers/tasks';
+import { Project, Task, User } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class ApiService {
   // }
 
 
-  //! ##### GENERAL FUNCATION ######  
+  //! ##### GENERAL FUNCATIONS ######  
 
   //TODO An axample for general funcation that can help short the code for similar andpoints with different value and data //
 
@@ -49,10 +50,8 @@ export class ApiService {
     )
   }
 
-  //! ###### TASKS MATHODS ######
-
-  getTasks(): Observable<Array<Task>> {
-    return this.http.get<Array<Task>>(`${this.serverUrl}tasks`,
+  GET<T>(endpoint: string): Observable<T> {
+    return this.http.get<T>(`${this.serverUrl}${endpoint}`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -61,39 +60,71 @@ export class ApiService {
       })
   }
 
+  DELETE<T>(endpoint: string, id: string): Observable<T> {
+    return this.http.delete<T>(
+      `${this.serverUrl}${endpoint}/${id}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': this.getToken()
+        }
+      }
+    )
+  }
+
+  UPDATE<T>(endpoint: string, id: string, data: T): Observable<T> {
+    return this.http.put<T>(
+      `${this.serverUrl}${endpoint}/${id}`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': this.getToken()
+        }
+      }
+    )
+  }
+
+  //! ###### TASKS MATHODS ######
+
+  getTasks(): Observable<Array<Task>> {
+    return this.GET<Array<Task>>('tasks')
+  }
+
   addTask(task: Task): Observable<Task> {
-    // return this.http.post<Task>(
-    //   `${this.serverUrl}tasks`,
-    //   task,
-    //   { headers: { 'Content-Type': 'application/json' } }
-    // )
     return this.POST<Task>('tasks', task)
   }
 
   deleteTask(id: string): Observable<Task> {
-    return this.http.delete<Task>(
-      `${this.serverUrl}tasks/${id}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth-token': this.getToken()
-        }
-      }
-    )
+    return this.DELETE<Task>('tasks', id)
   }
 
   updateTask(id: string, task: Task): Observable<Task> {
-    return this.http.put<Task>(
-      `${this.serverUrl}tasks/${id}`,
-      task,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth-token': this.getToken()
-        }
-      }
-    )
+    return this.UPDATE<Task>('tasks', id, task)
   }
+
+  //! ###### PROJECTS MATHODS ######
+
+  getOneProject(id: string): Observable<Project> {
+    return this.GET<Project>(`projects/${id}`)
+  }
+
+  getProject(): Observable<Array<Project>> {
+    return this.GET<Array<Project>>('projects')
+  }
+
+  addProject(project: Project): Observable<Project> {
+    return this.POST<Project>('projects', project)
+  }
+
+  deleteProject(id: string): Observable<Project> {
+    return this.DELETE<Project>('projects', id)
+  }
+
+  updateProject(id: string, project: Project): Observable<Project> {
+    return this.UPDATE<Project>('projects', id, project)
+  }
+
 
   //! ###### USERS MATHODS ######
 
