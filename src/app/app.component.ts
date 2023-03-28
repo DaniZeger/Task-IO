@@ -2,16 +2,24 @@ import { AfterViewInit, Component } from '@angular/core';
 import { SessionService } from './core/session.service';
 
 export interface Task {
-  title: String;
-  complete: Boolean;
-  description?: String
+  _id?: string | null
+  title?: string | null;
+  complete?: boolean | null;
+  description?: string | null
 }
 
 export interface Project {
-  title: String,
-  description: String,
-  image: String,
+  title: string,
+  description: string,
+  image: string,
   status: 'PLANNED' | 'IN PROGRESS' | 'DONE'
+}
+
+export interface User {
+  _id?: string | null
+  name?: string | null
+  email?: string | null
+  password?: string | null
 }
 
 @Component({
@@ -26,7 +34,7 @@ export class AppComponent implements AfterViewInit {
   constructor(private session: SessionService) { }
 
   ngAfterViewInit(): void {
-    this.session.redirectToHome()
+    // this.session.redirectToHome()
   }
 
 }

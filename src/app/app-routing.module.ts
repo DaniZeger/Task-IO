@@ -5,6 +5,7 @@ import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { SignupPageComponent } from './auth/signup-page/signup-page.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { ProjectPageComponent } from './projects/project-page/project-page.component';
+import { TaskPageComponent } from './tasks/task-page/task-page.component';
 
 const routes: Routes = [
   { path: 'projects', component: ProjectPageComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'signup', component: SignupPageComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'tasks', component: TaskPageComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

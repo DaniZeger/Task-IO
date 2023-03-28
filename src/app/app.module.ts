@@ -9,6 +9,7 @@ import { AboutModule } from './about/about.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CoreModule } from './core/core.module';
     AboutModule,
     AuthModule,
     SharedModule,
+    TasksModule,
     CoreModule
   ],
   providers: [],

@@ -8,7 +8,7 @@ import { Task, Project } from '../../app.component'
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent { //implements OnInit {
   today = new Date()
 
   sectionTitle = `Today's Tasks`
@@ -19,12 +19,12 @@ export class HomePageComponent implements OnInit {
     private logger: LoggerService
   ) { }
 
-  ngOnInit(): void {
-    this.api.getUserPosts().subscribe({
-      next: (data) => this.logger.log(data.toString()),
-      error: (err) => console.log(err)
-    })
-  }
+  // ngOnInit(): void {
+  //   this.api.getUserPosts().subscribe({
+  //     next: (data) => this.logger.log(data.toString()),
+  //     error: (err) => console.log(err)
+  //   })
+  // }
 
   projects: Array<Project> = [
     {

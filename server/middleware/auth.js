@@ -1,6 +1,8 @@
+// @ts-ignore
 const jwt = require('jsonwebtoken');
 const config = require('../config/dev');
 
+// @ts-ignore
 module.exports = (req, res, next) => {
     if (req.path.includes('login') ||
         req.path.includes('signup')) {
